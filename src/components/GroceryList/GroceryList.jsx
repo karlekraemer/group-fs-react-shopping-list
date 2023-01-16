@@ -7,21 +7,29 @@ function GroceryList({item}) {
     const togglePurchased = () => {
         console.log('clicked purchased');
         //set state
-        setIsPurchased(!isPurchased)
+        setIsPurchased(!isPurchased);
     }
     
     const onPurchaseOrNot = () => {
         if (item.isPurchased) {
-            return <p>purchased</p>
+            return <form>
+                        <p>{item.name}: {item.quantity}</p>
+                        <p>Status:  {item.isPurchased}</p>
+                                    {onPurchaseOrNot()}
+                        <p>purchased</p>
+                    </form>
         } else {
-            return <button onClick={togglePurchased}>Purchase</button>
+            return
         }
     }
     
     return (
         <form>
-            {item.name} is from {item.quantity}
+            <p>{item.name}: {item.quantity}</p>
+                <p>Status: {item.isPurchased}</p>
             {onPurchaseOrNot()}
+
+            <button onClick={togglePurchased}>Purchase</button>
         </form>
     )
 }

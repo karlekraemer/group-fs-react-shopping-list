@@ -16,8 +16,8 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     const list = req.body;
-    const sqlText = `INSERT INTO shoppinglist (name, quantity,unit)
-                     VALUES ($1, $2. $3)`;
+    const sqlText = `INSERT INTO shoppinglist (name, quantity, unit)
+                     VALUES ($1, $2, $3)`;
     // Let sql sanitize your inputs (NO Bobby Drop Tables here!)
     // the $1, $2, etc get substituted with the values from the array below
     pool.query(sqlText, [list.name, list.quantity, list.unit])
