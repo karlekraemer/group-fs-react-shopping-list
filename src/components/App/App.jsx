@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from '../Header/Header.jsx'
+import GroceryList from '../GroceryList/GroceryList.jsx'
 import './App.css';
 
 
@@ -29,7 +30,7 @@ function App() {
 
     const addItem = (event) => {
         event.preventDefault();
-        console.log('add item clicked', newItemName, newItemQuanity, newItemUnit);
+        console.log('add item clicked', newItemName, newItemQuantity, newItemUnit);
         // post request below
         axios({
             method: 'POST',
@@ -37,7 +38,8 @@ function App() {
             data: {
                 name: newItemName,
                 quantity: newItemQuantity,
-                unit: newItemUnit
+                unit: newItemUnit,
+                isPurchased: false, //we added this for boolean values of 'purchased'
             }
         })
             .then((response) => {
@@ -71,19 +73,25 @@ function App() {
                     <input id="unit" value={newItemUnit} onChange={(event) => setNewItemUnit(event.target.value)} />
                     <button type="submit">Add New Item</button>
                 </form>
-                {/* <p>{JSON.stringify(creatureList)}</p> */}
-                <ul>
+                {/* <p>{JSON.stringify(creatureList)}</p> */} 
+                {/* <ul>
                     {shoppingList.map(item => (
                         // <ListItem key={item.id} creature={item} /> */}
-                        <li key={item.id}>
+                        {/* <li key={item.id}>
                           {item.name} is {item.quantity}
                         </li> // when learning how to make components, we commented this out to move to the ListItem.jsx //
+                    ))} */}
+                    {/* </ul> */   }             
+                <main>
+                    {shoppingList.map(item => (
+                        <GroceryList key={item.id} item={item}/>
                     ))}
-                </ul>
-
+                </main> 
+                
             </main>
         </div>
     );
 }
+
 
 export default App;
